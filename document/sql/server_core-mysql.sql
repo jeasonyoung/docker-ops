@@ -38,7 +38,7 @@ create table tbl_ops_server (
 
     constraint `pk_ops_server` primary key(`id`),
     constraint `uk_ops_server_name` unique key(`name`),
-    constraint `uk_ops_server_abbr` unique key(`abbr`)
+    constraint `uk_ops_server_abbr` unique key(`auth_code`)
 ) engine=InnoDB default charset=utf8mb4 comment '服务器表';
 -- --------------------------------------------------------------------------------------------------------------------
 -- 2.服务器分组表
