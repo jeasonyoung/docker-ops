@@ -102,6 +102,8 @@ func (a *authService) GetRouters(ctx context.Context, userId uint64) ([]*model.R
 		if a.routerCache == nil {
 			a.routerCache = gcache.New()
 		}
+		//缓存数据
+		a.routerCache.Set(cacheKey, output, gconv.Duration("30m"))
 	}
 	return output, nil
 }
