@@ -24,6 +24,7 @@ type OpsDeployColumns struct {
 	Remark       string // 部署描述
 	GroupId      string // 服务器分组ID
 	RepositoryId string // 所属镜像仓库ID
+	Command      string // 附加执行命令
 	Status       string // 状态(-1:删除,0:停用,1:启用)
 	CreateTime   string // 创建时间
 	UpdateTime   string // 更新时间
@@ -36,6 +37,7 @@ var opsDeployColumns = OpsDeployColumns{
 	Remark:       "remark",
 	GroupId:      "group_id",
 	RepositoryId: "repository_id",
+	Command:      "command",
 	Status:       "status",
 	CreateTime:   "create_time",
 	UpdateTime:   "update_time",

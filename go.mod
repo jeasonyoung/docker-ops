@@ -1,8 +1,12 @@
 module docker-ops-server
 
-require github.com/gogf/gf v1.16.6
+go 1.17
 
 require (
+	github.com/gogf/gf v1.16.6
+	github.com/mojocn/base64Captcha v1.3.5
+	github.com/goflyfox/gtoken v1.4.5
+
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/clbanning/mxj v1.8.5-0.20200714211355-ff02cfb8ea28 // indirect
 	github.com/fatih/color v1.12.0 // indirect
@@ -22,5 +26,3 @@ require (
 	golang.org/x/text v0.3.6 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
-
-go 1.17

@@ -42,6 +42,7 @@ type OpsDeploy struct {
 	Remark       string      `orm:"remark"        json:"remark"`       // 部署描述
 	GroupId      uint64      `orm:"group_id"      json:"groupId"`      // 服务器分组ID
 	RepositoryId uint64      `orm:"repository_id" json:"repositoryId"` // 所属镜像仓库ID
+	Command      string      `orm:"command"       json:"command"`      // 附加执行命令
 	Status       int         `orm:"status"        json:"status"`       // 状态(-1:删除,0:停用,1:启用)
 	CreateTime   *gtime.Time `orm:"create_time"   json:"createTime"`   // 创建时间
 	UpdateTime   *gtime.Time `orm:"update_time"   json:"updateTime"`   // 更新时间
