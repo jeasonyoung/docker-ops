@@ -19,10 +19,38 @@
 
 # Database.
 [database]
-    link  = "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
+    type = "mysql"
+    host = "local_server"
+    port = "3306"
+    user = "root"
+    pass = "P@ssw0rd"
+    name = "ops_server_core"
+    prefix = "tbl_"
+    createdAt = "create_time"
+    updatedAt = "update_time"
     debug = true
     # Database logger.
     [database.logger]
         Path   = "/tmp/log/gf-app/sql"
         Level  = "all"
         Stdout = true
+
+[gfcli]
+    [[gfcli.gen.dao]]
+        type = "mysql"
+        host = "local_server"
+        port = "3306"
+        user = "root"
+        pass = "P@ssw0rd"
+        name = "ops_server_core"
+        removePrefix = "tbl_"
+    [gfcli.build]
+        name = "DockerOpsServer"
+        arch = "amd64"
+        system = "linux"
+        mod = "none"
+        cgo = 0
+        pack = "config,i18n,public,template"
+        version = "1.0"
+        output = "./bin"
+        extra = ""

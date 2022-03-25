@@ -5,6 +5,8 @@ create database if not exists ops_server_core default charset utf8mb4 collate ut
 set names 'utf8mb4';
 use ops_server_core;
 -- --------------------------------------------------------------------------------------------------------------------
+-- 10.字典数据表
+drop table if exists tbl_dict_data;
 -- 8.部署任务服务器表
 drop table if exists tbl_ops_deploy_task_server;
 -- 7.部署任务表
@@ -173,4 +175,46 @@ create table tbl_ops_deploy_task_server (
     constraint `fk_ops_deploy_task_server_t` foreign key(`task_id`) references tbl_ops_deploy_task(`id`),
     constraint `fk_ops_deploy_task_server_s` foreign key(`server_id`) references tbl_ops_server(`id`)
 ) engine=InnoDB default charset=utf8mb4 comment '部署任务服务器表';
+-- --------------------------------------------------------------------------------------------------------------------
+-- 9.字典类型表
+drop table if exists tbl_dict_type;
+create table tbl_dict_type (
+    `id`          bigint unsigned not null comment '字典ID',
+    `name`        varchar(64)  not null comment '字典名称',
+    `type`        varchar(128) not null comment '字典类型',
+    `remark`      varchar(255)          default null comment '字典备注',
+
+    `status`      tinyint               default 1 comment '状态(-1:删除,0:停用,1:启用)',
+    `create_time` timestamp    not null default current_timestamp comment '创建时间',
+    `update_time` timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
+
+    constraint `pk_dict_type` primary key (`id`),
+    constraint `uk_dict_type_type` unique key (`type`)
+) engine=InnoDB default charset=utf8mb4 comment '字典类型表';
+-- --------------------------------------------------------------------------------------------------------------------
+-- 10.字典数据表
+drop table if exists tbl_dict_data;
+create table tbl_dict_data (
+    `id`        bigint unsigned not null    comment '字典数据ID',
+    `code`        int unsigned default 0    comment '字典代码(排序)',
+    `label`        varchar(128) not null    comment '字典标签',
+    `value`        varchar(255) default ''  comment '字典键值',
+    `is_default` tinyint unsigned default 0 comment '是否默认(0:否,1:是)',
+
+    `type`        varchar(128) not null     comment '字典类型',
+
+    `css_class`  varchar(128) default null  comment '样式属性',
+    `list_class` varchar(128) default null  comment '表格回显样式',
+
+    `remark`  varchar(255) default null     comment '字典数据备注',
+
+    `status` tinyint default 1  comment '状态(-1:删除,0:停用,1:启用)',
+
+    `create_time` timestamp not null default current_timestamp comment '创建时间',
+    `update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
+
+    constraint `pk_dict_data` primary key (`id`),
+    constraint `uk_dict_data_value` unique key (`type`,`value`),
+    constraint `fk_dict_data_t` foreign key(`type`) references tbl_dict_type(`type`)
+) engine=InnoDB default charset=utf8mb4 comment '字典数据表';
 -- --------------------------------------------------------------------------------------------------------------------
